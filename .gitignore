@@ -1,0 +1,4 @@
+.emacs.desktop*
+__pycache__.py
+decorator_in_class*.py
+first_name_property.py
