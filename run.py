@@ -1,6 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # PYTHON_ARGCOMPLETE_OK
+"""
+>>> add(2, 3)
+5
+>>> add(4, 5)
+9
+>>> add.ncalls
+2
+>>> s = Spam()
+>>> s.bar(2)
+<__main__.Spam object at 0x...> 2
+>>> s.bar(3)
+<__main__.Spam object at 0x...> 3
+>>> s.bar.ncalls
+2
+"""
 from functools import wraps
 from types import MethodType
 
@@ -22,8 +37,8 @@ class Profiled:
 
 class Spam:
     @Profiled
-    def bar(self, x, y):
-        print(x, y)
+    def bar(self, x):
+        print(self, x)
 
 
 @Profiled
@@ -31,11 +46,7 @@ def add(x, y):
     return x + y
 
 
-add(2, 3)
-add(4, 5)
-add.ncalls
+if __name__ == "__main__":
+    import doctest
 
-s = Spam()
-s.bar(2)
-s.bar(3)
-s.bar.ncalls
+    doctest.testmod(optionflags=doctest.ELLIPSIS)
