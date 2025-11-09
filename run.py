@@ -16,18 +16,17 @@
 >>> s.bar.ncalls
 2
 """
-from functools import wraps
 from types import MethodType
 
 
 class Profiled:
     def __init__(self, func):
         self.ncalls = 0
-        wraps(func)(self)
+        self.func = func
 
     def __call__(self, *args, **kwargs):
         self.ncalls += 1
-        return self.__wrapped__(*args, **kwargs)
+        return self.func(*args, **kwargs)
 
     def __get__(self, instance, owner):
         if not instance:
