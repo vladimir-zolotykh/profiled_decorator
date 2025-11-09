@@ -4,6 +4,8 @@
 """
 >>> add(2, 3)
 5
+>>> add.__name__
+'add'
 >>> add(4, 5)
 9
 >>> add.ncalls
@@ -11,6 +13,10 @@
 >>> s = Spam()
 >>> s.bar(2)
 <__main__.Spam object at 0x...> 2
+>>> s.bar.__name__
+'bar'
+>>> s.bar.__doc__
+'Prints self, x'
 >>> s.bar(3)
 <__main__.Spam object at 0x...> 3
 >>> s.bar.ncalls
@@ -37,6 +43,7 @@ class Profiled:
 class Spam:
     @Profiled
     def bar(self, x):
+        """Prints self, x"""
         print(self, x)
 
 
